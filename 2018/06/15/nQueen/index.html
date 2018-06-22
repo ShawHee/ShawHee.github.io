@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+<meta name="google-site-verification" content="rC8NrRmvvEriQBSPBYwfv0EqGzHHR6OI0BajRDTDdfc" />
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.7.0/dist/APlayer.min.js"></script>
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "124c31aa"
+    });
+  daovoice('update');
+  </script>
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/githun32.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/github16.png?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+<script>
+    (function () {
+        if ('') {
+            if (prompt('请输入文章密码') !== '') {
+                alert('密码错误！');
+                if (history.length === 1) {
+                    location.replace("http://xxxxxxx.xxx"); // 这里替换成你的首页
+                } else {
+                    history.back();
+                }
+            }
+        }
+    })();
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="算法问题描述 　　八皇后问题是一个以国际象棋为背景的问题：如何能够在8×8的国际象棋棋盘上放置八个皇后，使得任何一个皇后都无法直接吃掉其他的皇后？为了达到此目的，任两个皇后都不能处于同一条横行、纵行或斜线上。八皇后问题可以推广为更一般的n皇后摆放问题：这时棋盘的大小变为n×n，而皇后个数也变成n。当且仅当n = 1或n ≥ 4时问题有解.  　　转换成算法问题可以表述为：  在一个N*N的棋盘上，">
+<meta name="keywords" content="算法,回溯,N皇后">
+<meta property="og:type" content="article">
+<meta property="og:title" content="N皇后问题">
+<meta property="og:url" content="http://yoursite.com/2018/06/15/nQueen/index.html">
+<meta property="og:site_name" content="Shaw He&#39;s Blog">
+<meta property="og:description" content="算法问题描述 　　八皇后问题是一个以国际象棋为背景的问题：如何能够在8×8的国际象棋棋盘上放置八个皇后，使得任何一个皇后都无法直接吃掉其他的皇后？为了达到此目的，任两个皇后都不能处于同一条横行、纵行或斜线上。八皇后问题可以推广为更一般的n皇后摆放问题：这时棋盘的大小变为n×n，而皇后个数也变成n。当且仅当n = 1或n ≥ 4时问题有解.  　　转换成算法问题可以表述为：  在一个N*N的棋盘上，">
+<meta property="og:updated_time" content="2018-06-15T15:13:50.375Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="N皇后问题">
+<meta name="twitter:description" content="算法问题描述 　　八皇后问题是一个以国际象棋为背景的问题：如何能够在8×8的国际象棋棋盘上放置八个皇后，使得任何一个皇后都无法直接吃掉其他的皇后？为了达到此目的，任两个皇后都不能处于同一条横行、纵行或斜线上。八皇后问题可以推广为更一般的n皇后摆放问题：这时棋盘的大小变为n×n，而皇后个数也变成n。当且仅当n = 1或n ≥ 4时问题有解.  　　转换成算法问题可以表述为：  在一个N*N的棋盘上，">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Shaw He's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/15/nQueen/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>N皇后问题 | Shaw He's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Shaw He's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-music">
+    <a href="/music/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-music"></i> <br />音乐</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-video">
+    <a href="/video/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-youtube"></i> <br />视频</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-photos">
+    <a href="/photos/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-image"></i> <br />相册</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+    <a href="/404/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />公益 404</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/15/nQueen/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shaw He">
+      <meta itemprop="description" content="Always believe that something wonderful are about to happen！">
+      <meta itemprop="image" content="/images/ali.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shaw He's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">N皇后问题
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-06-15 23:13:50" itemprop="dateCreated datePublished" datetime="2018-06-15T23:13:50+08:00">2018-06-15</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/06/15/nQueen/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/06/15/nQueen/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="算法问题描述"><a href="#算法问题描述" class="headerlink" title="算法问题描述"></a>算法问题描述</h2><blockquote>
+<p>　　八皇后问题是一个以国际象棋为背景的问题：如何能够在8×8的国际象棋棋盘上放置八个皇后，使得任何一个皇后都无法直接吃掉其他的皇后？为了达到此目的，任两个皇后都不能处于同一条横行、纵行或斜线上。八皇后问题可以推广为更一般的n皇后摆放问题：这时棋盘的大小变为n×n，而皇后个数也变成n。当且仅当n = 1或n ≥ 4时问题有解.</p>
+</blockquote>
+<p>　　转换成算法问题可以表述为：</p>
+<ol>
+<li>在一个N*N的棋盘上，一共需要放置N枚棋子</li>
+<li>要求每一行，每一列上只能放置1枚棋子</li>
+<li>要求任意斜线上也只能有1枚棋子</li>
+</ol>
+<hr>
+<h2 id="回溯算法的主要思想"><a href="#回溯算法的主要思想" class="headerlink" title="回溯算法的主要思想"></a>回溯算法的主要思想</h2><blockquote>
+<p>　　回溯法是一种选优搜索法，按选优条件向前搜索，以达到目标。<br>　　但当探索到某一步时，发现原先选择并不优或达不到目标，<br>　　就退回一步重新选择，这种走不通就退回再走的技术为回溯法，<br>　　而满足回溯条件的某个状态的点称为“回溯点”。  </p>
+</blockquote>
+<p>　　主要思想：  </p>
+<ol>
+<li>按照深度优先搜索的策略，从根结点出发深度探索解空间树。当探索到某一结点时，要先判断该结点是否包含问题的解，如果包含，就从该结点出发继续探索下去，如果该结点不包含问题的解，则逐层向其祖先结点回溯。    </li>
+<li>若用回溯法求问题的所有解时，要回溯到根，且根结点的所有可行的子树都要已被搜索遍才结束。    </li>
+<li>而若使用回溯法求任一个解时，只要搜索到问题的一个解就可以结束。</li>
+</ol>
+<hr>
+<h2 id="回溯算法解N皇后算法描述"><a href="#回溯算法解N皇后算法描述" class="headerlink" title="回溯算法解N皇后算法描述"></a>回溯算法解N皇后算法描述</h2><p>　　这里用一个N*N的矩阵来存储棋盘。注意，此处的N应该大于等于4，2皇后问题和3皇后问题均无解。     </p>
+<ol>
+<li>算法开始，清空棋盘。当前行设为第1行，当前列设为第1列。</li>
+<li>判断当前行，当前列的位置是否可以放置皇后，即该位置所在的行、列和斜线上是否已经有其他皇后存在。</li>
+<li>如果符合放置条件，在当前位置放置1个皇后，当前行设为下一行，当前列设为第一列；如果不符合放置条件，当前列设为下一列，重复第2步。</li>
+<li>如果某一行遍历结束后（当前列等于），没有到符合条件的位置放置皇后，那么进行回溯：当前行设为上一行，当前列设为上一行皇后所在位置的下一列，取走该行的皇后。<br><strong>注意，如果回溯到了第1行，算法结束。</strong></li>
+<li>如果最后一行找到了皇后位置，就代表有一个问题的可行解，将其输出。然后，当前列设为下一列，取走这一行的皇后，<strong>继续执行算法</strong>。</li>
+</ol>
+<hr>
+<h2 id="代码描述（Java）"><a href="#代码描述（Java）" class="headerlink" title="代码描述（Java）"></a>代码描述（Java）</h2><p>　　实现该算法时，面临的第一个问题就是如何判断当前位置(x,y)是否可以放置皇后。最容易想到的方法是将棋盘存为一个二维矩阵，然后判断X行和Y列上是否已有皇后存在，再判断同一斜线上是否存在其他皇后。用该方法可以实现，代码也不复杂，但效率比较低下。N皇后问题中，需要多次调用这个方法，因此，在设计算法的过程中，要尽可能的对其进行优化。<br>　　在这里介绍另外一种方法:把棋盘存储为一个N维数组a[N]，数组中第i个元素的值代表第i行的皇后位置，这样便可以把问题的空间规模压缩为一维O(N)，在判断是否冲突时也很简单，首先每行只有一个皇后，且在数组中只占据一个元素的位置，行冲突就不存在了，其次是列冲突，判断一下是否有a[i]与当前要放置皇后的列j相等即可。通过观察可以发现所有在斜线上冲突的皇后的位置都有规律，即它们所在的行列互减的绝对值相等，即| row – i | = | col – a[i] | 。这样当前位置是否可以放置皇后的问题已经解决。</p>
+<p>　　接下来，将算法分成若干个过程，一步步进行代码实现。</p>
+<h3 id="对棋盘进行初始化"><a href="#对棋盘进行初始化" class="headerlink" title="对棋盘进行初始化"></a>对棋盘进行初始化</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(<span class="keyword">int</span> a[])</span></span>&#123;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; a.length ; i++) &#123;</div><div class="line">        a[i] = INITIAL ;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>　　对一维数组进行遍历，将所有位置都置为同一个初始值。</p>
+<hr>
+<h3 id="判断当前位是否可以放置皇后"><a href="#判断当前位是否可以放置皇后" class="headerlink" title="判断当前位是否可以放置皇后"></a>判断当前位是否可以放置皇后</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">valid</span><span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> row,<span class="keyword">int</span> col)</span> </span>&#123;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; a.length ; i++) &#123;</div><div class="line">        <span class="comment">//列是否相等，行列差是否相等</span></div><div class="line">        <span class="keyword">if</span> (col == a[i] || Math.abs(row - i) == Math.abs(col - a[i])) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">false</span> ;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">true</span> ;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>　　只需要判断列冲突和斜线冲突的情况，注意斜线判断的时候是对绝对值的比较。    </p>
+<hr>
+<h3 id="存储一个可行解"><a href="#存储一个可行解" class="headerlink" title="存储一个可行解"></a>存储一个可行解</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printqueen</span><span class="params">(<span class="keyword">int</span> a[])</span> </span>&#123;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i:a) &#123;</div><div class="line">        System.out.print(i+<span class="number">1</span>+<span class="string">" "</span>);</div><div class="line">    &#125;</div><div class="line">    System.out.println();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>　　简单的数组打印，不需要多说。加1是为了个人习惯，阅读比较方便。</p>
+<hr>
+<h3 id="寻找可行解的过程"><a href="#寻找可行解的过程" class="headerlink" title="寻找可行解的过程"></a>寻找可行解的过程</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">queen</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span>(i &lt; <span class="number">4</span> || i &gt; <span class="number">64</span>) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span> ;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">int</span> a[] = <span class="keyword">new</span> <span class="keyword">int</span>[i] ;</div><div class="line">    init(a) ;       <span class="comment">//初始化</span></div><div class="line">    <span class="keyword">int</span> x = <span class="number">0</span> ;     <span class="comment">//行</span></div><div class="line">    <span class="keyword">int</span> y = <span class="number">0</span> ;     <span class="comment">//列</span></div><div class="line">    <span class="keyword">while</span>(x &lt; i) &#123;</div><div class="line">        <span class="comment">//遍历该行所有列，找出皇后的位置</span></div><div class="line">        <span class="keyword">while</span>(y &lt; i) &#123;</div><div class="line">            <span class="keyword">if</span>(valid(a,x,y)) &#123;</div><div class="line">                a[x] = y ;</div><div class="line">                y = <span class="number">0</span> ;</div><div class="line">                <span class="keyword">break</span> ;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span>&#123;</div><div class="line">                y++ ;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//如果该行未找到皇后位置</span></div><div class="line">        <span class="keyword">if</span>(a[x] == INITIAL) &#123;</div><div class="line">            <span class="comment">//如果已经回溯到了第一行，结束算法</span></div><div class="line">            <span class="keyword">if</span>(x == <span class="number">0</span>) &#123;</div><div class="line">                <span class="keyword">break</span> ;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span> &#123;</div><div class="line">                x-- ;</div><div class="line">                y = a[x] + <span class="number">1</span> ;</div><div class="line">                a[x] = INITIAL ;</div><div class="line">                <span class="keyword">continue</span> ;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//如果最后一行找到了皇后，代表一个解</span></div><div class="line">        <span class="keyword">if</span>(x == i - <span class="number">1</span>) &#123;</div><div class="line">            <span class="comment">//输出解</span></div><div class="line">            printqueen(a);</div><div class="line">            cout++ ;</div><div class="line">            y = a[x] + <span class="number">1</span> ;</div><div class="line">            a[x] = INITIAL ;</div><div class="line">            <span class="keyword">continue</span> ;</div><div class="line">        &#125;</div><div class="line">        x++ ;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> cout ;       <span class="comment">//返回可行解个数</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>　　入口参数i代表求解皇后问题，应该不小3。返回值是问题的可行解个数。<br>　　首先，对数组进行初始化，定义两个变量X和Y，分别代表行和列。第1个while是对行的遍历，第2个while是寻找当前行皇后的位置。如果当前行没找到，进行回溯，如果当前行是最后一行，输出一个解。当回溯到第一行时，算法结束，返回可行解个数。</p>
+<hr>
+<h3 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.lang.Math ;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NQueen</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INITIAL = -<span class="number">10000</span> ;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> cout = <span class="number">0</span> ;</div><div class="line">    <span class="comment">//对棋盘进行初始化</span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(<span class="keyword">int</span> a[])</span></span>&#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; a.length ; i++) &#123;</div><div class="line">            a[i] = INITIAL ;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//判断当前位置是否可以放置一个皇后</span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">valid</span><span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> row,<span class="keyword">int</span> col)</span> </span>&#123;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; a.length ; i++) &#123;</div><div class="line">            <span class="comment">//列是否相等，行列差是否相等</span></div><div class="line">            <span class="keyword">if</span> (col == a[i] || Math.abs(row - i) == Math.abs(col - a[i])) &#123;</div><div class="line">                <span class="keyword">return</span> <span class="keyword">false</span> ;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span> ;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//存储一个可行解</span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printqueen</span><span class="params">(<span class="keyword">int</span> a[])</span> </span>&#123;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i:a) &#123;</div><div class="line">            System.out.print(i+<span class="number">1</span>+<span class="string">" "</span>);</div><div class="line">        &#125;</div><div class="line">        System.out.println();</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">queen</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(i &lt; <span class="number">4</span> || i &gt; <span class="number">64</span>) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="number">0</span> ;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">int</span> a[] = <span class="keyword">new</span> <span class="keyword">int</span>[i] ;</div><div class="line">        init(a) ;       <span class="comment">//初始化</span></div><div class="line">        <span class="keyword">int</span> x = <span class="number">0</span> ;     <span class="comment">//行</span></div><div class="line">        <span class="keyword">int</span> y = <span class="number">0</span> ;     <span class="comment">//列</span></div><div class="line">        <span class="keyword">while</span>(x &lt; i) &#123;</div><div class="line">            <span class="comment">//遍历该行所有列，找出皇后的位置</span></div><div class="line">            <span class="keyword">while</span>(y &lt; i) &#123;</div><div class="line">                <span class="keyword">if</span>(valid(a,x,y)) &#123;</div><div class="line">                    a[x] = y ;</div><div class="line">                    y = <span class="number">0</span> ;</div><div class="line">                    <span class="keyword">break</span> ;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">else</span>&#123;</div><div class="line">                    y++ ;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="comment">//如果该行未找到皇后位置</span></div><div class="line">            <span class="keyword">if</span>(a[x] == INITIAL) &#123;</div><div class="line">                <span class="comment">//如果已经回溯到了第一行，结束算法</span></div><div class="line">                <span class="keyword">if</span>(x == <span class="number">0</span>) &#123;</div><div class="line">                    <span class="keyword">break</span> ;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">else</span> &#123;</div><div class="line">                    x-- ;</div><div class="line">                    y = a[x] + <span class="number">1</span> ;</div><div class="line">                    a[x] = INITIAL ;</div><div class="line">                    <span class="keyword">continue</span> ;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="comment">//如果最后一行找到了皇后，代表一个解</span></div><div class="line">            <span class="keyword">if</span>(x == i - <span class="number">1</span>) &#123;</div><div class="line">                <span class="comment">//输出解</span></div><div class="line">                printqueen(a);</div><div class="line">                cout++ ;</div><div class="line">                y = a[x] + <span class="number">1</span> ;</div><div class="line">                a[x] = INITIAL ;</div><div class="line">                <span class="keyword">continue</span> ;</div><div class="line">            &#125;</div><div class="line">            x++ ;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> cout ;       <span class="comment">//返回可行解个数</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</div><div class="line">        <span class="keyword">long</span> startTime=System.currentTimeMillis();   <span class="comment">//获取开始时间</span></div><div class="line">        System.out.println(queen(<span class="number">8</span>)+<span class="string">"个解"</span>);</div><div class="line">        <span class="keyword">long</span> endTime=System.currentTimeMillis(); <span class="comment">//获取结束时间</span></div><div class="line">        System.out.println(<span class="string">"程序运行时间： "</span>+(endTime-startTime)+<span class="string">"ms"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>　　输出结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div></pre></td><td class="code"><pre><div class="line">1 5 8 6 3 7 2 4 </div><div class="line">1 6 8 3 7 4 2 5 </div><div class="line">1 7 4 6 8 2 5 3 </div><div class="line">1 7 5 8 2 4 6 3 </div><div class="line">2 4 6 8 3 1 7 5 </div><div class="line">2 5 7 1 3 8 6 4 </div><div class="line">2 5 7 4 1 8 6 3 </div><div class="line">2 6 1 7 4 8 3 5 </div><div class="line">2 6 8 3 1 4 7 5 </div><div class="line">2 7 3 6 8 5 1 4 </div><div class="line">2 7 5 8 1 4 6 3 </div><div class="line">2 8 6 1 3 5 7 4 </div><div class="line">3 1 7 5 8 2 4 6 </div><div class="line">3 5 2 8 1 7 4 6 </div><div class="line">3 5 2 8 6 4 7 1 </div><div class="line">3 5 7 1 4 2 8 6 </div><div class="line">3 5 8 4 1 7 2 6 </div><div class="line">3 6 2 5 8 1 7 4 </div><div class="line">3 6 2 7 1 4 8 5 </div><div class="line">3 6 2 7 5 1 8 4 </div><div class="line">3 6 4 1 8 5 7 2 </div><div class="line">3 6 4 2 8 5 7 1 </div><div class="line">3 6 8 1 4 7 5 2 </div><div class="line">3 6 8 1 5 7 2 4 </div><div class="line">3 6 8 2 4 1 7 5 </div><div class="line">3 7 2 8 5 1 4 6 </div><div class="line">3 7 2 8 6 4 1 5 </div><div class="line">3 8 4 7 1 6 2 5 </div><div class="line">4 1 5 8 2 7 3 6 </div><div class="line">4 1 5 8 6 3 7 2 </div><div class="line">4 2 5 8 6 1 3 7 </div><div class="line">4 2 7 3 6 8 1 5 </div><div class="line">4 2 7 3 6 8 5 1 </div><div class="line">4 2 7 5 1 8 6 3 </div><div class="line">4 2 8 5 7 1 3 6 </div><div class="line">4 2 8 6 1 3 5 7 </div><div class="line">4 6 1 5 2 8 3 7 </div><div class="line">4 6 8 2 7 1 3 5 </div><div class="line">4 6 8 3 1 7 5 2 </div><div class="line">4 7 1 8 5 2 6 3 </div><div class="line">4 7 3 8 2 5 1 6 </div><div class="line">4 7 5 2 6 1 3 8 </div><div class="line">4 7 5 3 1 6 8 2 </div><div class="line">4 8 1 3 6 2 7 5 </div><div class="line">4 8 1 5 7 2 6 3 </div><div class="line">4 8 5 3 1 7 2 6 </div><div class="line">5 1 4 6 8 2 7 3 </div><div class="line">5 1 8 4 2 7 3 6 </div><div class="line">5 1 8 6 3 7 2 4 </div><div class="line">5 2 4 6 8 3 1 7 </div><div class="line">5 2 4 7 3 8 6 1 </div><div class="line">5 2 6 1 7 4 8 3 </div><div class="line">5 2 8 1 4 7 3 6 </div><div class="line">5 3 1 6 8 2 4 7 </div><div class="line">5 3 1 7 2 8 6 4 </div><div class="line">5 3 8 4 7 1 6 2 </div><div class="line">5 7 1 3 8 6 4 2 </div><div class="line">5 7 1 4 2 8 6 3 </div><div class="line">5 7 2 4 8 1 3 6 </div><div class="line">5 7 2 6 3 1 4 8 </div><div class="line">5 7 2 6 3 1 8 4 </div><div class="line">5 7 4 1 3 8 6 2 </div><div class="line">5 8 4 1 3 6 2 7 </div><div class="line">5 8 4 1 7 2 6 3 </div><div class="line">6 1 5 2 8 3 7 4 </div><div class="line">6 2 7 1 3 5 8 4 </div><div class="line">6 2 7 1 4 8 5 3 </div><div class="line">6 3 1 7 5 8 2 4 </div><div class="line">6 3 1 8 4 2 7 5 </div><div class="line">6 3 1 8 5 2 4 7 </div><div class="line">6 3 5 7 1 4 2 8 </div><div class="line">6 3 5 8 1 4 2 7 </div><div class="line">6 3 7 2 4 8 1 5 </div><div class="line">6 3 7 2 8 5 1 4 </div><div class="line">6 3 7 4 1 8 2 5 </div><div class="line">6 4 1 5 8 2 7 3 </div><div class="line">6 4 2 8 5 7 1 3 </div><div class="line">6 4 7 1 3 5 2 8 </div><div class="line">6 4 7 1 8 2 5 3 </div><div class="line">6 8 2 4 1 7 5 3 </div><div class="line">7 1 3 8 6 4 2 5 </div><div class="line">7 2 4 1 8 5 3 6 </div><div class="line">7 2 6 3 1 4 8 5 </div><div class="line">7 3 1 6 8 5 2 4 </div><div class="line">7 3 8 2 5 1 6 4 </div><div class="line">7 4 2 5 8 1 3 6 </div><div class="line">7 4 2 8 6 1 3 5 </div><div class="line">7 5 3 1 6 8 2 4 </div><div class="line">8 2 4 1 7 5 3 6 </div><div class="line">8 2 5 3 1 7 4 6 </div><div class="line">8 3 1 6 2 5 7 4 </div><div class="line">8 4 1 3 6 2 7 5 </div><div class="line">92个解</div><div class="line">程序运行时间： 11ms</div></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="递归实现"><a href="#递归实现" class="headerlink" title="递归实现"></a>递归实现</h2><p>　　回溯算法通常可以用递归来实现，其主要代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">backtrack</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;  </div><div class="line">    <span class="keyword">if</span>(x == n)&#123;      <span class="comment">//如果找到一个解，进行输出</span></div><div class="line">        cout++ ;  </div><div class="line">        printqueen() ;  </div><div class="line">    &#125;  </div><div class="line">    <span class="keyword">else</span>  </div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> y = <span class="number">0</span> ;y &lt; n;y++)&#123;      <span class="comment">//探测当前行的每一列 </span></div><div class="line">            a[x] = y ;</div><div class="line">            <span class="keyword">if</span>(valid(a,x,y)) &#123;</div><div class="line">                backtrack(x+<span class="number">1</span>) ;        <span class="comment">//递归调用，循环求解 </span></div><div class="line">            &#125; </div><div class="line">        &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>　　该方法由于在探测第x行后，如果找到一个可以放置皇后的位置y后，则会递归探测下一行，结束后则会继续探测x行y+1列，故可以找到所有的N皇后的解。<br>　　但是一般来说递归的效率比较差，因此此处仅做简单介绍，有兴趣的朋友可自行实现。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/Weixin.jpg" alt="Shaw He 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/Alipay.jpg" alt="Shaw He 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/算法/" rel="tag"><i class="fa fa-tag"></i> 算法</a>
+          
+            <a href="/tags/回溯/" rel="tag"><i class="fa fa-tag"></i> 回溯</a>
+          
+            <a href="/tags/N皇后/" rel="tag"><i class="fa fa-tag"></i> N皇后</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/15/synchronized/" rel="next" title="Java synchronized详解">
+                <i class="fa fa-chevron-left"></i> Java synchronized详解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/15/LeetCode 41 缺失的第一个正数/" rel="prev" title="LeetCode 41 缺失的第一个正数">
+                LeetCode 41 缺失的第一个正数 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/ali.png"
+                alt="Shaw He" />
+            
+              <p class="site-author-name" itemprop="name">Shaw He</p>
+              <p class="site-description motion-element" itemprop="description">Always believe that something wonderful are about to happen！</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/ShawHee" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:simhc@whu.edu.cn" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/cnshawhe" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/huang-zhang-de-shen" target="_blank" title="知乎"><i class="fa fa-fw fa-book"></i>知乎</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                推荐阅读
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://xianbai.me/learn-md/index.html" title="Markdown入门参考" target="_blank">Markdown入门参考</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://fontawesome.com/icons?d=gallery" title="图标集合" target="_blank">图标集合</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.jianshu.com/p/923aec861af3" title="MacVim配置" target="_blank">MacVim配置</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          <div id="music163player">
+    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=86 src="//music.163.com/outchain/player?type=2&id=28160235&auto=1&height=66">
+    </iframe>
+</div>
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#算法问题描述"><span class="nav-number">1.</span> <span class="nav-text">算法问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#回溯算法的主要思想"><span class="nav-number">2.</span> <span class="nav-text">回溯算法的主要思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#回溯算法解N皇后算法描述"><span class="nav-number">3.</span> <span class="nav-text">回溯算法解N皇后算法描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码描述（Java）"><span class="nav-number">4.</span> <span class="nav-text">代码描述（Java）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对棋盘进行初始化"><span class="nav-number">4.1.</span> <span class="nav-text">对棋盘进行初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#判断当前位是否可以放置皇后"><span class="nav-number">4.2.</span> <span class="nav-text">判断当前位是否可以放置皇后</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存储一个可行解"><span class="nav-number">4.3.</span> <span class="nav-text">存储一个可行解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#寻找可行解的过程"><span class="nav-number">4.4.</span> <span class="nav-text">寻找可行解的过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#完整代码"><span class="nav-number">4.5.</span> <span class="nav-text">完整代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#递归实现"><span class="nav-number">5.</span> <span class="nav-text">递归实现</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shaw He</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by"></div>
+  <span class="post-count">开放空间</span>
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">&nbsp&nbsp|&nbsp&nbsp&nbsp知识共享</span>
+</div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">&nbsp&nbsp|&nbsp&nbsp&nbsp博客全站共6.4k字</span>
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/meting@1.1.0/dist/Meting.min.js"></script>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.3.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+<script src="/js/src/photoswipe.min.js?v="></script>
+<script src="/js/src/photoswipe-ui-default.min.js?v="></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'yzYhuEck72zlBVSB2rQoq218-gzGzoHsz',
+        appKey: '5CJJjyK3y42ic7SzTkgrcVgi',
+        placeholder: '~撰写评论~',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/love.js"></script>
+
+</body>
+</html>
+
+
