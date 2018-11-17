@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-11-12T09:43:19.015Z</updated>
+  <updated>2018-11-17T08:28:23.431Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LeetCode 871 最低加油次数</title>
+    <link href="http://yoursite.com/2018/11/17/LeetCode%20871%20%E6%9C%80%E4%BD%8E%E5%8A%A0%E6%B2%B9%E6%AC%A1%E6%95%B0%20/"/>
+    <id>http://yoursite.com/2018/11/17/LeetCode 871 最低加油次数 /</id>
+    <published>2018-11-17T08:26:45.684Z</published>
+    <updated>2018-11-17T08:28:23.431Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>汽车从起点出发驶向目的地，该目的地位于出发位置东面 <code>target</code> 英里处。</p><p>沿途有加油站，每个 <code>station[i]</code> 代表一个加油站，它位于出发位置东面 <code>station[i][0]</code> 英里处，并且有 <code>station[i][1]</code> 升汽油。</p><p>假设汽车油箱的容量是无限的，其中最初有 <code>startFuel</code> 升燃料。它每行驶 1 英里就会用掉 1 升汽油。</p><p>当汽车到达加油站时，它可能停下来加油，将所有汽油从加油站转移到汽车中。</p><p>为了到达目的地，汽车所必要的最低加油次数是多少？如果无法到达目的地，则返回 <code>-1</code> 。</p><p>注意：如果汽车到达加油站时剩余燃料为 0，它仍然可以在那里加油。如果汽车到达目的地时剩余燃料为 0，仍然认为它已经到达目的地。</p><p><strong>示例1</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">输入：target = 1, startFuel = 1, stations = []</div><div class="line">输出：0</div><div class="line">解释：我们可以在不加油的情况下到达目的地。</div></pre></td></tr></table></figure><p><strong>示例2</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">输入：target = 100, startFuel = 1, stations = [[10,100]]</div><div class="line">输出：-1</div><div class="line">解释：我们无法抵达目的地，甚至无法到达第一个加油站。</div></pre></td></tr></table></figure><p><strong>示例3</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">输入：target = 100, startFuel = 10, stations = [[10,60],[20,30],[30,30],[60,40]]</div><div class="line">输出：2</div><div class="line">解释：</div><div class="line">我们出发时有 10 升燃料。</div><div class="line">我们开车来到距起点 10 英里处的加油站，消耗 10 升燃料。将汽油从 0 升加到 60 升。</div><div class="line">然后，我们从 10 英里处的加油站开到 60 英里处的加油站（消耗 50 升燃料），</div><div class="line">并将汽油从 10 升加到 50 升。然后我们开车抵达目的地。</div><div class="line">我们沿途在1两个加油站停靠，所以返回 2 。</div></pre></td></tr></table></figure><h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><p>根据题目要求找到最低加油次数，首先考虑贪心算法。贪心算法的主要思想是：将问题的解决分解为若干个阶段，在当前阶段做出的最优选择，会导致整体最优的结果。</p><p>在这道题目中，我们的目标是使得汽车到达终点，其中汽车会经过若干次加油，则可以将每两次加油的中间过程看做一个阶段，加油就是一次选择——选择合适的加油站，使得总的加油次数最少。</p><p>接下来，要弄清楚的问题是“当前阶段”有哪些选择，以及最优选择是什么。假如汽车开始的汽油是<code>X</code>升，那么可以行驶<code>X</code>英里，如果从出发点到<code>X</code>公里范围里面一共有<code>Y</code>个加油站，因为要求最低加油次数，所以先假定每次只能加一次油，因此就有<code>Y</code>种选择，最优的选择就是其中具有最大油量的加油站，假定其有<code>max</code>升油，那下一个阶段就变成出发点到<code>X+max</code>英里的位置。（注意已经加油的车站不能再次加油）</p><p>如果当前阶段里面无可用的加油站，就说明无法到达目的地；如果任意阶段的选择之后，<code>y+max</code>大于到目的地的距离，就可以到达目的地。</p><h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><p>建立一个数组表示加油站是否已经使用过，初始值为<code>0</code>；<code>y</code>表示当前汽车能够到达的最远点，<code>count</code>记录加油次数，<code>temp</code>记录当前阶段选择的加油站下标。</p><p>当<code>y</code>小于<code>target</code>的时候循环选择加油站，对位置处于<code>0~y</code>的加油站进行遍历，找出具有最大油量的加油站，更新<code>y</code>和<code>count</code>的值，并将该加油站的状态置为<code>1</code>。一直循环，直到<code>y</code>大于<code>target</code>或者无可用加油站，即找出的最大油量为<code>0</code>。</p><p>完整代码如下：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">minRefuelStops</span><span class="params">(<span class="keyword">int</span> target, <span class="keyword">int</span> startFuel, <span class="keyword">int</span>[][] stations)</span> </span>&#123;</div><div class="line">       <span class="keyword">int</span>[] state = <span class="keyword">new</span> <span class="keyword">int</span>[stations.length]; <span class="comment">// 建立一个数组，0代表未使用，1代表已使用</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; state.length; i++) &#123;</div><div class="line">            state[i] = <span class="number">0</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">int</span> y = startFuel; <span class="comment">// 代表汽车当前能到达的最远点</span></div><div class="line">        <span class="keyword">int</span> count = <span class="number">0</span>; <span class="comment">// 代表汽车加油的次数</span></div><div class="line">        <span class="keyword">int</span> temp = <span class="number">0</span>; <span class="comment">//记录当前阶段加油站的下标</span></div><div class="line">        <span class="keyword">while</span> (y &lt; target) &#123;</div><div class="line">            <span class="keyword">int</span> max = <span class="number">0</span>; <span class="comment">// 范围内可获得的最大加油量</span></div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; stations.length; i++) &#123;</div><div class="line">                <span class="keyword">if</span> (stations[i][<span class="number">0</span>] &lt;= y &amp;&amp; state[i] != <span class="number">1</span> &amp;&amp; stations[i][<span class="number">1</span>] &gt; max) &#123;</div><div class="line">                    max = stations[i][<span class="number">1</span>];</div><div class="line">                    temp = i;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span>(max == <span class="number">0</span>) &#123;<span class="comment">//无可用加油站</span></div><div class="line">                <span class="keyword">return</span> -<span class="number">1</span>;</div><div class="line">            &#125;</div><div class="line">            state[temp] = <span class="number">1</span>;</div><div class="line">            y = y + max; <span class="comment">// 重置到达的最远点</span></div><div class="line">            count++;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> count;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h2&gt;&lt;p&gt;汽车从起点出发驶向目的地，该目的地位于出发位置东面 &lt;code&gt;target&lt;/code&gt; 英里处。&lt;/p&gt;
+&lt;p&gt;沿途有加
+      
+    
+    </summary>
+    
+      <category term="LeetCode" scheme="http://yoursite.com/categories/LeetCode/"/>
+    
+    
+      <category term="算法" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="贪心算法" scheme="http://yoursite.com/tags/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
   
   <entry>
     <title>小程序踩坑记录（二)</title>
