@@ -1949,7 +1949,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #cf5432;
+  background: #49b5ff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3068,13 +3068,6 @@ ul.breadcrumb li+li:last-child {
   .post-body {
     text-align: justify;
   }
-}
-body {
-  background-image: url("/images/bz1.jpg");
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: 50% 50%;
 }
 .post {
   margin-top: 10px;
