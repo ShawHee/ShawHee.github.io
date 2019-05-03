@@ -159,15 +159,11 @@
 </script>
 
 <script>
-    (function () {
-        if ('') {
-            if (prompt('请输入文章密码') !== '') {
-                alert('密码错误！');
-                if (history.length === 1) {
-                    location.replace("http://xxxxxxx.xxx"); // 这里替换成你的首页
-                } else {
-                    history.back();
-                }
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误');
+                history.back();
             }
         }
     })();
@@ -647,8 +643,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/09/30/念念不忘/" rel="prev" title="念念不忘，必有回响">
-                念念不忘，必有回响 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/11/12/synchronized/" rel="prev" title="Java synchronized详解">
+                Java synchronized详解 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -852,11 +848,6 @@
               
                 <span class="links-of-author-item">
                   <a href="mailto:simhc@whu.edu.cn" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
-                  
-                </span>
-              
-                <span class="links-of-author-item">
-                  <a href="https://twitter.com/cnshawhe" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
                   
                 </span>
               
