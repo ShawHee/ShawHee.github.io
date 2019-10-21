@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/photos/data.json</loc>
+    
+    <lastmod>2019-10-21T03:49:01.757Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2019/02/13/%E5%BF%B5%E5%BF%B5%E4%B8%8D%E5%BF%98/</loc>
     
     <lastmod>2019-02-13T02:14:02.611Z</lastmod>
@@ -33,13 +40,6 @@
     <loc>http://yoursite.com/2018/11/12/synchronized/</loc>
     
     <lastmod>2018-11-12T05:09:36.142Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/photos/data.json</loc>
-    
-    <lastmod>2018-09-30T15:05:36.952Z</lastmod>
     
   </url>
   
